@@ -24,4 +24,33 @@
       <% end %>
     </div>
   </div>
+
+  <% provider_value = f.object.provider.presence || (params[:authentication_method] && params[:authentication_method][:provider]) %>
+  <% env_credentials = Spree::AuthenticationMethod.environment_credentials_for(provider_value) %>
+  <% env_managed = env_credentials[:api_key].present? || env_credentials[:api_secret].present? %>
+
+  <% if env_managed %>
+    <div class="col-12">
+      <div class="alert alert-info">
+        <%= I18n.t('spree.social_env_credentials_notice') %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="col-6">
+    <div data-hook="api-key" class="field">
+      <%= f.field_container :api_key do %>
+        <%= f.label :api_key, I18n.t('spree.social_api_key') %>
+        <%= f.text_field :api_key, class: 'fullwidth', disabled: env_managed, placeholder: env_managed ? I18n.t('spree.social_env_placeholder') : nil %>
+      <% end %>
+    </div>
+  </div>
+  <div class="col-6">
+    <div data-hook="api-secret" class="field">
+      <%= f.field_container :api_secret do %>
+        <%= f.label :api_secret, I18n.t('spree.social_api_secret') %>
+        <%= f.text_field :api_secret, class: 'fullwidth', disabled: env_managed, placeholder: env_managed ? I18n.t('spree.social_env_placeholder') : nil %>
+      <% end %>
+    </div>
+  </div>
 </div>

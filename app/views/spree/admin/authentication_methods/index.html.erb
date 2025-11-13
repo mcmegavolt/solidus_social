@@ -36,8 +36,20 @@
       <% @authentication_methods.each do |method|%>
         <tr id="<%= dom_id method %>" data-hook="admin_trackers_index_rows">
           <td><%= method.provider %></td>
-          <td><%= truncate method.api_key, length: 10 %></td>
-          <td><%= truncate method.api_secret, length: 10 %></td>
+          <td>
+            <% if method.managed_via_environment? %>
+              <span class="badge badge-info"><%= I18n.t('spree.social_env_managed') %></span>
+            <% else %>
+              <%= truncate method.api_key.to_s, length: 10 %>
+            <% end %>
+          </td>
+          <td>
+            <% if method.managed_via_environment? %>
+              <span class="badge badge-info"><%= I18n.t('spree.social_env_managed') %></span>
+            <% else %>
+              <%= truncate method.api_secret.to_s, length: 10 %>
+            <% end %>
+          </td>
           <td><%= method.environment.to_s.titleize %></td>
           <td class="align-right"><%= method.active ? I18n.t('spree.say_yes') : I18n.t('spree.say_no') %></td>
           <td class="actions">
