@@ -21,7 +21,16 @@ module SolidusSocial
         session[:omniauth] = nil unless @spree_user.new_record?
       end
 
-      ::Spree::UserRegistrationsController.prepend self
+      if defined?(::Spree::UserRegistrationsController)
+        ::Spree::UserRegistrationsController.prepend self
+      elsif defined?(::Rails)
+        ::Rails.application.config.to_prepare do
+          if defined?(::Spree::UserRegistrationsController) &&
+             !::Spree::UserRegistrationsController.ancestors.include?(::SolidusSocial::Spree::UserRegistrationsControllerDecorator)
+            ::Spree::UserRegistrationsController.prepend ::SolidusSocial::Spree::UserRegistrationsControllerDecorator
+          end
+        end
+      end
     end
   end
 end
