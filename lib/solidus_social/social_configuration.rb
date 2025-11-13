@@ -5,6 +5,11 @@ module Spree
     attr_accessor :providers
     preference :path_prefix, :string, default: 'users'
 
+    def initialize
+      super
+      @providers ||= {}
+    end
+
     ::Spree::SocialConfig = Spree::SocialConfiguration.new
   end
 end
