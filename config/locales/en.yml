@@ -27,3 +27,4 @@ en:
     please_confirm_your_email: "Please confirm your email address to continue"
     sign_in_with: "Login with %{provider}"
     you_have_signed_in_with_these_services: "You Have Signed In With These Services"
+    social_missing_credentials_notice: "No credentials have been configured for this provider yet."

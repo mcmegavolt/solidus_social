@@ -23,8 +23,12 @@ es:
     social_api_secret: 'API Secreto'
     social_authentication_methods: 'Métodos de autenticación'
     social_authentication_methods_description: 'Configurar métodos de autenticación de OAuth'
+    social_env_managed: 'Gestionado por configuración'
+    social_env_credentials_notice: 'Las credenciales para este proveedor se cargan desde la configuración y no pueden editarse aquí.'
+    social_env_placeholder: 'Gestionado por configuración'
     social_provider: 'Proveedor social'
     please_confirm_your_email: 'Por favor confirme su email para continuar'
     sign_in_with: 'Autenticado con %{provider}'
     you_have_signed_in_with_these_services: "Has iniciado sesión con estos servicios"
     environment: Ambiente
+    social_missing_credentials_notice: 'Aún no se han configurado credenciales para este proveedor.'
