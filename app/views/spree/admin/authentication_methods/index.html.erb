@@ -38,16 +38,20 @@
           <td><%= method.provider %></td>
           <td>
             <% if method.managed_via_environment? %>
-              <span class="text-muted"><%= I18n.t('spree.social_env_indicator') %></span>
+              <span class="badge badge-info"><%= I18n.t('spree.social_env_managed') %></span>
+            <% elsif method.api_key.present? %>
+              <span class="text-muted">••••••</span>
             <% else %>
-              <%= truncate method.api_key.to_s, length: 10 %>
+              <span class="text-muted"><%= I18n.t('spree.social_no_credentials_short') %></span>
             <% end %>
           </td>
           <td>
             <% if method.managed_via_environment? %>
-              <span class="text-muted"><%= I18n.t('spree.social_env_indicator') %></span>
+              <span class="badge badge-info"><%= I18n.t('spree.social_env_managed') %></span>
+            <% elsif method.api_secret.present? %>
+              <span class="text-muted">••••••</span>
             <% else %>
-              <%= truncate method.api_secret.to_s, length: 10 %>
+              <span class="text-muted"><%= I18n.t('spree.social_no_credentials_short') %></span>
             <% end %>
           </td>
           <td><%= method.environment.to_s.titleize %></td>

@@ -21,11 +21,11 @@ en:
     social_authentication_methods: "Social Authentication Methods"
     social_authentication_methods_description: "Setup OAuth Authentication Methods"
     social_env_managed: "Managed via configuration"
-    social_env_indicator: "Set via config"
     social_env_credentials_notice: "Credentials for this provider are loaded from configuration and cannot be edited here."
     social_env_placeholder: "Managed via configuration"
     social_provider: "Social Provider"
     please_confirm_your_email: "Please confirm your email address to continue"
     sign_in_with: "Login with %{provider}"
     you_have_signed_in_with_these_services: "You Have Signed In With These Services"
+    social_no_credentials_short: 'Not configured yet'
     social_missing_credentials_notice: "No credentials have been configured for this provider yet."

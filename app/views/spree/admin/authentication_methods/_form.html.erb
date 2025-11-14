@@ -28,10 +28,11 @@
   <% provider_value = f.object.provider.presence || (params[:authentication_method] && params[:authentication_method][:provider]) %>
   <% env_credentials = Spree::AuthenticationMethod.environment_credentials_for(provider_value) %>
   <% env_managed = env_credentials[:api_key].present? || env_credentials[:api_secret].present? %>
+  <% missing_credentials = !env_managed && env_credentials[:api_key].blank? && env_credentials[:api_secret].blank? && f.object.api_key.blank? && f.object.api_secret.blank? %>
 
-  <% if env_managed %>
+  <% if missing_credentials %>
     <div class="col-12">
-      <span class="badge badge-info"><%= I18n.t('spree.social_env_managed') %></span>
+      <div class="alert alert-danger"><%= I18n.t('spree.social_missing_credentials_notice') %></div>
     </div>
   <% end %>
 
@@ -51,10 +52,4 @@
       <% end %>
     </div>
   </div>
-
-  <% unless env_managed || env_credentials[:api_key].present? || env_credentials[:api_secret].present? || f.object.api_key.present? || f.object.api_secret.present? %>
-    <div class="col-12">
-      <p class="text-muted"><%= I18n.t('spree.social_missing_credentials_notice') %></p>
-    </div>
-  <% end %>
 </div>
