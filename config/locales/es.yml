@@ -24,6 +24,7 @@ es:
     social_authentication_methods: 'Métodos de autenticación'
     social_authentication_methods_description: 'Configurar métodos de autenticación de OAuth'
     social_env_managed: 'Gestionado por configuración'
+    social_env_indicator: 'Definido por configuración'
     social_env_credentials_notice: 'Las credenciales para este proveedor se cargan desde la configuración y no pueden editarse aquí.'
     social_env_placeholder: 'Gestionado por configuración'
     social_provider: 'Proveedor social'
