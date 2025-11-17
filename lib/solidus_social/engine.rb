@@ -18,9 +18,13 @@ module SolidusSocial
 
     engine_name 'solidus_social'
 
-    initializer 'solidus_social.ensure_autoload_paths_mutable', before: :set_autoload_paths do
+    initializer 'solidus_social.ensure_autoload_paths_mutable', before: :set_autoload_paths do |app|
       ActiveSupport::Dependencies.autoload_paths = ActiveSupport::Dependencies.autoload_paths.dup
       ActiveSupport::Dependencies.autoload_once_paths = ActiveSupport::Dependencies.autoload_once_paths.dup
+
+      config.autoload_paths = config.autoload_paths.dup if config.autoload_paths.frozen?
+      config.autoload_once_paths = config.autoload_once_paths.dup if config.autoload_once_paths.frozen?
+      config.eager_load_paths = config.eager_load_paths.dup if config.eager_load_paths.frozen?
     end
 
     # use rspec for tests
