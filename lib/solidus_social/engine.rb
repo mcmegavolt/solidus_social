@@ -28,6 +28,11 @@ module SolidusSocial
 
       stack = app.config.middleware if app.respond_to?(:config) && app.config.respond_to?(:middleware)
       if stack
+        middlewares = stack.instance_variable_get(:@middlewares)
+        if middlewares&.frozen?
+          stack.instance_variable_set(:@middlewares, middlewares.dup)
+        end
+
         operations = stack.instance_variable_get(:@operations)
         if operations&.frozen?
           stack.instance_variable_set(:@operations, operations.dup)
