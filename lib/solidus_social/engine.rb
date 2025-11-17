@@ -18,6 +18,11 @@ module SolidusSocial
 
     engine_name 'solidus_social'
 
+    initializer 'solidus_social.ensure_autoload_paths_mutable', before: :set_autoload_paths do
+      ActiveSupport::Dependencies.autoload_paths = ActiveSupport::Dependencies.autoload_paths.dup
+      ActiveSupport::Dependencies.autoload_once_paths = ActiveSupport::Dependencies.autoload_once_paths.dup
+    end
+
     # use rspec for tests
     config.generators do |g|
       g.test_framework :rspec
