@@ -25,6 +25,14 @@ module SolidusSocial
       config.autoload_paths = config.autoload_paths.dup if config.autoload_paths.frozen?
       config.autoload_once_paths = config.autoload_once_paths.dup if config.autoload_once_paths.frozen?
       config.eager_load_paths = config.eager_load_paths.dup if config.eager_load_paths.frozen?
+
+      stack = app.config.middleware if app.respond_to?(:config) && app.config.respond_to?(:middleware)
+      if stack
+        middlewares = stack.instance_variable_get(:@middlewares)
+        if middlewares&.frozen?
+          stack.instance_variable_set(:@middlewares, middlewares.dup)
+        end
+      end
     end
 
     # use rspec for tests
