@@ -27,6 +27,23 @@ module SolidusSocial
       config.eager_load_paths = config.eager_load_paths.dup if config.eager_load_paths.frozen?
 
       stack = app.config.middleware if app.respond_to?(:config) && app.config.respond_to?(:middleware)
+
+      if app.respond_to?(:routes_reloader)
+        routes_paths = app.routes_reloader.paths
+        if routes_paths&.frozen?
+          app.routes_reloader.instance_variable_set(:@paths, routes_paths.dup)
+        end
+      end
+
+      if app.config.respond_to?(:paths)
+        routes_config = app.config.paths['config/routes.rb'] rescue nil
+        if routes_config && routes_config.instance_variable_defined?(:@paths)
+          cfg_paths = routes_config.instance_variable_get(:@paths)
+          if cfg_paths&.frozen?
+            routes_config.instance_variable_set(:@paths, cfg_paths.dup)
+          end
+        end
+      end
       if stack
         middlewares = stack.instance_variable_get(:@middlewares)
         if middlewares&.frozen?
